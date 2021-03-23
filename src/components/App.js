@@ -1,19 +1,66 @@
 import React, { Component } from 'react';
 import logo from '../logo.png';
 import './App.css';
+const IpfsHttpClient = require("ipfs-http-client");
+
+const ipfs = IpfsHttpClient({
+  host: "ipfs.infura.io",
+  port: "5001",
+  protocol: "https",
+});
+// const ipfs = IpfsHttpClient('localhost', '5001', { protocol: 'http' });
+// console.log(ipfs);
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      buffer: null
+    }
+  }
+
+  captureFile = (e) => {
+    e.preventDefault();
+    // console.log("file captured");
+    const file = e.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => {
+      // console.log("Buffer :", Buffer(reader.result));
+      this.setState({ buffer: Buffer(reader.result) })
+    }
+
+  }
+  submitFile = (e) => {
+    e.preventDefault();
+    // console.log("file submitted");
+    // console.log(this.state.buffer);
+
+    ipfs.add(this.state.buffer, (err, result) => {
+
+      console.log('Ipfs Result', result);
+
+      if (err) {
+        console.error(err);
+        return
+      }
+
+      console.log("done one");
+    });
+    console.log("done two");
+  }
   render() {
     return (
       <div>
         <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
           <a
             className="navbar-brand col-sm-3 col-md-2 mr-0"
-            href="http://www.dappuniversity.com/bootcamp"
+            href="http://fractio.herokuapp.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Dapp University
+            Fract.io file uploader
           </a>
         </nav>
         <div className="container-fluid mt-5">
@@ -21,23 +68,27 @@ class App extends Component {
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto">
                 <a
-                  href="http://www.dappuniversity.com/bootcamp"
+                  href="http://fractio.herokuapp.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <img src={logo} className="App-logo" alt="logo" />
                 </a>
-                <h1>Dapp University Starter Kit</h1>
-                <p>
-                  Edit <code>src/components/App.js</code> and save to reload.
-                </p>
+                &nbsp;
+                <h1>UPLOAD FORM</h1>
+
+                <form onSubmit={this.submitFile}>
+                  <input type="file" onChange={this.captureFile} />
+                  <input type="submit" />
+                </form>
+
                 <a
                   className="App-link"
-                  href="http://www.dappuniversity.com/bootcamp"
+                  href="http://fractio.herokuapp.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  LEARN BLOCKCHAIN <u><b>NOW! </b></u>
+                  Create Pyenamic NFT's <u><b>NOW! </b></u>
                 </a>
               </div>
             </main>
