@@ -87,6 +87,7 @@ class App extends Component {
                 >
                   Create Pyenamic NFT's <u><b>NOW! </b></u>
                 </a>
+                {this.state.imageURL ? <div> <img src={`https://ipfs.io/ipfs/${this.state.imageURL}`} />  </div> : null}
               </div>
             </main>
           </div>
