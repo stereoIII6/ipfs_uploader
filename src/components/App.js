@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import './App.css';
 
-const logo = "https://ipfs.io/ipfs/QmWwkzRTUXiHJfE129GELR2kEDeH2MnLC3moPc54rs8gxy?filename=L%C3%84MESTAR.png";
 const IpfsHttpClient = require("ipfs-http-client");
 
 const ipfs = IpfsHttpClient({
@@ -72,14 +71,7 @@ class App extends Component {
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto">
-                <a
-                  href="http://fractio.herokuapp.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={logo} className="App-logo" style={{ width: "300px" }} alt="logo" />
-                </a>
-                &nbsp;
+
                 <h1>UPLOAD FORM</h1>
 
                 <form onSubmit={this.submitFile}>
