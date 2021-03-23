@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import logo from '../logo.png';
+
 import './App.css';
+
+const logo = "https://ipfs.io/ipfs/QmWwkzRTUXiHJfE129GELR2kEDeH2MnLC3moPc54rs8gxy?filename=L%C3%84MESTAR.png";
 const IpfsHttpClient = require("ipfs-http-client");
 
 const ipfs = IpfsHttpClient({
@@ -37,18 +39,21 @@ class App extends Component {
     // console.log("file submitted");
     // console.log(this.state.buffer);
 
-    ipfs.add(this.state.buffer, (err, result) => {
+    if (this.state.buffer) {
+      ipfs.add(this.state.buffer).then((result, err) => {
 
-      console.log('Ipfs Result', result);
+        console.log('Ipfs Result', result);
 
-      if (err) {
-        console.error(err);
-        return
-      }
+        if (err) {
+          // console.error(err);
+          return
+        }
+        this.setState({ imageURL: result.path })
+        console.log(this.state.imageURL);
+      });
 
-      console.log("done one");
-    });
-    console.log("done two");
+    }
+
   }
   render() {
     return (
@@ -72,7 +77,7 @@ class App extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={logo} className="App-logo" alt="logo" />
+                  <img src={logo} className="App-logo" style={{ width: "300px" }} alt="logo" />
                 </a>
                 &nbsp;
                 <h1>UPLOAD FORM</h1>
