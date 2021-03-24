@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Input, InputGroup, Form, Navbar } from 'reactstrap';
+import Screen from './Screen';
 
 const IpfsHttpClient = require("ipfs-http-client");
 
@@ -17,7 +20,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      buffer: null
+      buffer: null,
+      imageURL: null,
+      check: "orange"
     }
   }
 
@@ -47,51 +52,52 @@ class App extends Component {
           // console.error(err);
           return
         }
-        this.setState({ imageURL: result.path })
+        this.setState({ imageURL: result.path, check: "orange" })
         console.log(this.state.imageURL);
       });
 
     }
 
   }
+  copy = (e) => {
+    e.preventDefault();
+    console.log("copied");
+    this.setState({ check: "mediumseagreen" })
+  }
   render() {
     return (
       <div>
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-          <a
-            className="navbar-brand col-sm-3 col-md-2 mr-0"
-            href="http://fractio.herokuapp.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Fract.io file uploader
-          </a>
-        </nav>
         <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
-              <div className="content mr-auto ml-auto">
+              <div className="content mr-auto ml-auto" >
 
-                <h1>UPLOAD FORM</h1>
+                <h3>MEDIA UPLOAD</h3>
 
-                <form onSubmit={this.submitFile}>
-                  <input type="file" onChange={this.captureFile} />
-                  <input type="submit" />
-                </form>
+                <Form onSubmit={this.submitFile}>
+                  <InputGroup>
+                    <Input type="file" onChange={this.captureFile} />
+                    <Input type="submit" value="UPLOAD" />
+                  </InputGroup>
+                </Form>
 
-                <a
-                  className="App-link"
-                  href="http://fractio.herokuapp.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Create Pyenamic NFT's <u><b>NOW! </b></u>
-                </a>
-                {this.state.imageURL ? <div> <img src={`https://ipfs.io/ipfs/${this.state.imageURL}`} alt="upload" /> <br /> <a href={`https://ipfs.io/ipfs/${this.state.imageURL}`} >{this.state.imageURL}</a> </div> : null}
+                {this.state.imageURL
+                  ? <div >
+
+                    <img src={`https://ipfs.io/ipfs/${this.state.imageURL}`} alt="upload" style={{ width: "420px" }} /> <br />
+                    <div style={{ background: "#aa6633", borderRadius: "3px", marginTop: "2em", paddingLeft: "10px", color: "white" }}>
+                      <a href={`https://ipfs.io/ipfs/${this.state.imageURL}`} style={{ color: "white", textDecoration: "none" }}>{this.state.imageURL}</a> &nbsp; &nbsp;
+                    <CopyToClipboard text={this.state.imageURL}>
+                        <Button style={{ background: this.state.check, borderRadius: "3px", border: "0px" }} onClick={this.copy}><img src="https://www.flaticon.com/svg/vstatic/svg/1250/1250673.svg?token=exp=1616545317~hmac=ea4f91b46af22e57de327b25ff3fe798" alt="" style={{ width: "16px" }} /></Button>
+                      </CopyToClipboard></div>
+                  </div>
+                  : null}
               </div>
+
             </main>
           </div>
         </div>
+        <Screen />
       </div>
     );
   }
