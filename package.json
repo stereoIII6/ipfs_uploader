@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "IPFS UPLOAD",
   "author": "stereodocbush@gmail.com",
-    "engines": {
+  "engines": {
     "node": "12.x"
   },
   "dependencies": {
@@ -13,13 +13,13 @@
     "babel-preset-stage-2": "6.24.1",
     "babel-preset-stage-3": "6.24.1",
     "babel-register": "6.26.0",
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.6.0",
     "bootstrap-icons": "^1.4.0",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chai-bignumber": "3.0.0",
     "ipfs-http-client": "^49.0.4",
-    "react": "^16.8.4",
+    "react": "^16.14.0",
     "react-bootstrap": "^1.5.2",
     "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "^16.14.0",

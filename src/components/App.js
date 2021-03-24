@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Input, InputGroup, Form, Navbar } from 'reactstrap';
+import { Button, Input, InputGroup, Form } from 'reactstrap';
 import Screen from './Screen';
 
 const IpfsHttpClient = require("ipfs-http-client");
