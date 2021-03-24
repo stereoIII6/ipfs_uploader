@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "IPFS UPLOAD",
   "author": "stereodocbush@gmail.com",
+    "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
