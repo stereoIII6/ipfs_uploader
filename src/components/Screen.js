@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { Button } from 'reactstrap';
 import Layers from './Layers';
+import Media from './Media';
 
 class Screen extends Component {
 
@@ -11,7 +12,7 @@ class Screen extends Component {
                     <Layers fixLayer={this.props.fixLayer} check={this.props.check} layers={this.props.layers} />
 
                     <div id="mediaDragStage" className="col-9 p-0 m-0" style={{ height: "450px", background: "cornflowerblue" }}>
-                        { }
+                        <Media check={this.props.check} layers={this.props.layers} />
                     </div>
                 </div>
                 <div className="row p-0 m-0">
