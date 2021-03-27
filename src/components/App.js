@@ -27,14 +27,20 @@ class App extends Component {
       layers: []
     }
   }
-
-  addLayer = (e) => {
+  fixLayer = (e) => {
     e.preventDefault();
-    console.log("add Layer");
+    // console.log("add Layer");
     this.setState({
       layers: [
         ...this.state.layers, // SPREAD PREVIOUS LAYERS
-        { ipfsPath: "", x: 1, y: 1, z: 1, r: 0, o: 1 } // NEW LAYER
+        {
+          path: document.getElementById('path').value,
+          x: document.getElementById('x').value,
+          y: document.getElementById('y').value,
+          z: document.getElementById('z').value,
+          r: document.getElementById('r').value,
+          o: document.getElementById('o').value
+        }
       ]
     });
   }
@@ -111,7 +117,7 @@ class App extends Component {
             </main>
           </div>
         </div>
-        <Screen addLayer={this.addLayer} check={this.state.check} layers={this.state.layers} />
+        <Screen fixLayer={this.fixLayer} check={this.state.check} layers={this.state.layers} />
       </div>
     );
   }

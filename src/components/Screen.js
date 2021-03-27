@@ -8,7 +8,7 @@ class Screen extends Component {
         return (
             <div id="screen" className="jumbotron mt-5 p-0">
                 <div className="row p-0 m-0 ">
-                    <Layers addLayer={this.props.addLayer} check={this.props.check} layers={this.props.layers} />
+                    <Layers fixLayer={this.props.fixLayer} check={this.props.check} layers={this.props.layers} />
 
                     <div id="mediaDragStage" className="col-9 p-0 m-0" style={{ height: "450px", background: "cornflowerblue" }}>
                         { }
