@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+// import { Button } from 'reactstrap';
+import Layers from './Layers';
 
 class Screen extends Component {
+
     render() {
         return (
             <div id="screen" className="jumbotron mt-5 p-0">
                 <div className="row p-0 m-0 ">
-                    <div id="layers" className="col-3 p-0 m-0" style={{ height: "450px", background: "lightblue", color: "ivory" }}>
-                        <h3 className="d-inline ml-2">LAYERS</h3>
-                        <Button className="btn-info d-inline ml-2">+</Button>
-                    </div>
+                    <Layers addLayer={this.props.addLayer} check={this.props.check} layers={this.props.layers} />
 
                     <div id="mediaDragStage" className="col-9 p-0 m-0" style={{ height: "450px", background: "cornflowerblue" }}>
                         { }

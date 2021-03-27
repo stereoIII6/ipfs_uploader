@@ -4,6 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Input, InputGroup, Form } from 'reactstrap';
 import Screen from './Screen';
+import Coming from './Coming';
 
 const IpfsHttpClient = require("ipfs-http-client");
 
@@ -22,8 +23,20 @@ class App extends Component {
     this.state = {
       buffer: null,
       imageURL: null,
-      check: "orange"
+      check: "orange",
+      layers: []
     }
+  }
+
+  addLayer = (e) => {
+    e.preventDefault();
+    console.log("add Layer");
+    this.setState({
+      layers: [
+        ...this.state.layers, // SPREAD PREVIOUS LAYERS
+        { ipfsPath: "", x: 1, y: 1, z: 1, r: 0, o: 1 } // NEW LAYER
+      ]
+    });
   }
 
   captureFile = (e) => {
@@ -68,6 +81,7 @@ class App extends Component {
     return (
       <div>
         <div className="container-fluid mt-5">
+          <Coming />
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto" >
@@ -97,7 +111,7 @@ class App extends Component {
             </main>
           </div>
         </div>
-        <Screen />
+        <Screen addLayer={this.addLayer} check={this.state.check} layers={this.state.layers} />
       </div>
     );
   }
