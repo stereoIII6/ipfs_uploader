@@ -12,7 +12,13 @@ class Layers extends Component {
                 : e.target.value;
         this.setState({ [e.target.name]: value });
     }
-
+    editLayer = (e) => {
+        e.preventDefault();
+        console.log(e.target.id);
+    }
+    deleteLayer = (e) => {
+        e.preventDefault();
+    }
     render() {
         // console.log(this.props.layers.length);
         // console.log(this.props.check);
@@ -23,29 +29,20 @@ class Layers extends Component {
 
                     <Form key={this.props.layers.length} onSubmit={this.fixLayer}> <InputGroup>
                         <Input type="text" id="path" placeholder="IPFS PATH" onChange={this.onChange} />
-                    </InputGroup><InputGroup>
-                            <Input type="text" id="x" placeholder="X POS" onChange={this.onChange} />
-                            <Input type="text" id="y" placeholder="Y POS" onChange={this.onChange} />
-                            <Input type="text" id="z" placeholder="Z POS" onChange={this.onChange} />
-                            <Input type="text" id="r" placeholder="ROTATE" onChange={this.onChange} />
-                            <Input type="text" id="o" placeholder="ALPHA" onChange={this.onChange} />
-                            <Button type="submit" value="+" >+</Button>
-                        </InputGroup>
+
+                        <Button type="submit" value="+" >+</Button>
+                    </InputGroup>
                     </Form>
                     <div>{
                         console.log(this.props.layers),
                         this.props.layers.map(layer => (
                             <div key={layer.path} className="alert alert-success" >
                                 <div>
-                                    <img src={`https://ipfs.io/ipfs/${layer.path}`} alt="" style={{ width: `${layer.z / 100 * 36}px`, opacity: layer.o / 100 }} />
-                                    {layer.r}°
-                                    {layer.o}%op
-                                    {layer.z}%sc
-                                    {layer.x}x
-                                    {layer.y}y
-                                 </div>
-                                <Button className="btn-sm btn-info" value="edit">edit</Button>
-                                <Button className="btn-sm btn-danger" >delete</Button>
+                                    <img src={`https://ipfs.io/ipfs/${layer.path}`} alt="" style={{ width: `36px`, float: "left", marginRight: "2em" }} />
+
+                                </div>
+
+                                <Button className="btn-sm btn-danger" id={layer.path} onClick={this.deleteLayer}>delete</Button>
 
                             </div>
                         ))

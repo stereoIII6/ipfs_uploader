@@ -35,11 +35,11 @@ class App extends Component {
         ...this.state.layers, // SPREAD PREVIOUS LAYERS
         {
           path: document.getElementById('path').value,
-          x: document.getElementById('x').value,
-          y: document.getElementById('y').value,
-          z: document.getElementById('z').value,
-          r: document.getElementById('r').value,
-          o: document.getElementById('o').value
+          /*        x: document.getElementById('x').value,
+                    y: document.getElementById('y').value,
+                    z: document.getElementById('z').value,
+                    r: document.getElementById('r').value,
+                    o: document.getElementById('o').value */
         }
       ]
     });
