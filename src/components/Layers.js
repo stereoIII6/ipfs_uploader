@@ -61,7 +61,7 @@ class Layers extends Component {
 		this.props.deleteLayer(newLayers);	
 	}
     }
-    function dynamicSort (property) {
+    function dynamicSort(property) {
         var sortOrder = 1;
         if(property[0] === "-") {
 	        sortOrder = -1;
