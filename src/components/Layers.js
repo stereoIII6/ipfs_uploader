@@ -31,6 +31,7 @@ class Layers extends Component {
             obj: null
         }
         this.props.addLayer(newLayer);
+        document.getElementById("path").value = "";
     }
     render() {
 
