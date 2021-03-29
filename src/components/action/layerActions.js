@@ -7,12 +7,13 @@ import {
     MOVE_LAYER
 } from "./types";
 
-export const getLayers = () => (dispatch, getState) => {
+export const getLayers = () => (dispatch) => {
+    console.log("action get layers")
     dispatch(setLoadLayer());
-    console.log(getState);
 };
 
 export const setLoadLayer = () => {
+    console.log("action layers loading")
     return {
         type: LOAD_LAYERS
     };
@@ -26,9 +27,11 @@ export const addLayer = (newLayer) => {
     };
 };
 
-export const deleteLayer = () => {
+export const deleteLayer = (id) => {
+    console.log("action delete layer", id);
     return {
-        type: DEL_LAYER
+        type: DEL_LAYER,
+        payload: id
     };
 };
 
