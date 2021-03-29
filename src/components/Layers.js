@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, InputGroup, Input, Form } from 'reactstrap';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addLayer, deleteLayer, moveLayer } from "./action/layerActions.js"
+import { addLayer, deleteLayer, moveLayer, layersLoaded } from "./action/layerActions.js"
 const _ = require('lodash');
 class Layers extends Component {
     state = {
@@ -14,7 +14,8 @@ class Layers extends Component {
         layers: PropTypes.array,
         addLayer: PropTypes.func,
         deleteLayer: PropTypes.func,
-        moveLayer: PropTypes.func
+        moveLayer: PropTypes.func,
+        layersLoaded: PropTypes.func
     };
     onChange = (e) => {
         const value =
@@ -29,6 +30,7 @@ class Layers extends Component {
         const newLayer = {
             path: document.getElementById("path").value,
             key: this.props.layers.length,
+            name: document.getElementById("name").value !== "" ? document.getElementById("name").value : this.props.layers.length,
             obj: null
         }
         console.log("click add layer", newLayer);
@@ -40,32 +42,12 @@ class Layers extends Component {
         console.log("click delete layer", e.target.id);
         const dropLayer = e.target.id;
         // drop layer
-        const newLayers = this.props.layers.filter(layer => layer.key !== dropLayer);
-	if(dropLayer < this.props.layers.length){
-	// renumerate layers after dropped layer
-        let holdLayers = [];
-	let i = 0;
-	while(i < this.props.layers.length){
-		if(i >= dropLayer){
-			holdLayers[i] = this.props.layers[i];
-			holdLayers[i].key = i; 
-		}
-		i++;
-	}
-	// sort layers array
-	let delLayers = _.sortBy(holdLayers,"key", function(n) {
-	  return Math.sin(n);
-	}); 
-	this.props.deleteLayer(delLayers);
-        document.getElementById("path").value = "";
-	}
-	else{
-		this.props.deleteLayer(newLayers);	
-	}
+        const newLayers = this.props.layers.filter(layer => layer.key.toString() !== dropLayer.toString());
+        console.log(newLayers);
+        this.props.deleteLayer(newLayers);
     }
 
     render() {
-
         // console.log(this.props.layers.length);
         // console.log(this.props.check);
         return (
@@ -75,16 +57,18 @@ class Layers extends Component {
 
                     <Form onSubmit={this.goAddLayer}> <InputGroup>
                         <Input type="text" id="path" placeholder="IPFS PATH" onChange={this.onChange} />
+                        <Input type="text" id="name" placeholder="LAYER NAME" onChange={this.onChange} />
 
                         <Button type="submit" value="+" >+</Button>
                     </InputGroup>
                     </Form>
                     <div>{
                         // console.log(this.props.layers),
+                        this.props.layers.reverse(),
                         this.props.layers.map(layer => (
 
                             <div key={layer.key} className="alert alert-success" >
-                                <h3 style={{ float: "left", marginRight: "1em" }}>{layer.key}</h3>
+                                <h5 style={{ float: "left", marginRight: "1em" }}>{layer.name}</h5>
                                 <Button style={{ float: "left", marginRight: "1em", width: "4em" }}>
                                     <img src={`https://ipfs.io/ipfs/${layer.path}`} alt="" style={{ width: `36px`, float: "left", marginRight: "2em" }} />
 
@@ -113,4 +97,4 @@ class Layers extends Component {
 const mapStateToProps = state => ({
     layers: state.layerState.layers,
 });
-export default connect(mapStateToProps, { addLayer, deleteLayer, moveLayer })(Layers);
+export default connect(mapStateToProps, { addLayer, deleteLayer, moveLayer, layersLoaded })(Layers);

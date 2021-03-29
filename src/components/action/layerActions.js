@@ -1,22 +1,29 @@
 import {
-    GET_LAYERS,
-    GET_LAYER,
     LOAD_LAYERS,
+    LAYERS_LOADED,
     ADD_LAYER,
     DEL_LAYER,
     MOVE_LAYER
 } from "./types";
 
 export const getLayers = () => (dispatch) => {
-    console.log("action get layers")
+    console.log("action get layers");
     dispatch(setLoadLayer());
 };
 
+export const layersLoaded = () => {
+    console.log("action layers loaded");
+    return {
+        type: LAYERS_LOADED
+    }
+}
+
 export const setLoadLayer = () => {
-    console.log("action layers loading")
+    console.log("action layers loading");
     return {
         type: LOAD_LAYERS
     };
+
 };
 
 export const addLayer = (newLayer) => {
