@@ -40,12 +40,39 @@ class Layers extends Component {
         console.log("click delete layer", e.target.id);
         const dropLayer = e.target.id;
         // drop layer
-        // rename layers after dropped layer
-        // sort layers array
-
-        this.props.deleteLayer(dropLayer);
+        const newLayers = this.props.layers.filter(layer => layer.key !== dropLayer);
+	if(dropLayer < this.props.layers.length){
+	// renumerate layers after dropped layer
+        let holdLayers = [];
+	let i = 0;
+	while(i < this.props.layers.length){
+		if(i >= dropLayer){
+			holdLayers[i] = this.props.layers[i];
+			holdlayers[i].key = i; 
+		}
+		i++;
+	}
+	// sort layers array
+	let delLayers = holdLayers.sort(dynamicSort("key")); 
+	this.props.deleteLayer(delLayers);
         document.getElementById("path").value = "";
+	}
+	else{
+		this.props.deleteLayer(newLayers);	
+	}
     }
+    dynamicSort = (property) => {
+        var sortOrder = 1;
+        if(property[0] === "-") {
+	        sortOrder = -1;
+	        property = property.substr(1);
+	    }
+        return function (a,b) {
+	        var result = (a[property] < b[property]) 
+			? -1 : (a[property] > b[property]) ? 1 : 0;
+	        return result * sortOrder;
+		}
+}
     render() {
 
         // console.log(this.props.layers.length);

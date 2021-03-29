@@ -37,7 +37,7 @@ export default function (state = initState, action) {
             console.log("reduced delete layer", action.payload);
             return {
                 ...state,
-                layers: state.layers.filter(layer => layer.key.toString() !== action.payload.toString())
+                layers: action.payload
             };
         default:
             return state;

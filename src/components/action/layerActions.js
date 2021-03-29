@@ -27,11 +27,11 @@ export const addLayer = (newLayer) => {
     };
 };
 
-export const deleteLayer = (id) => {
-    console.log("action delete layer", id);
+export const deleteLayer = (newLayers) => {
+    console.log("action delete layer", newLayers);
     return {
         type: DEL_LAYER,
-        payload: id
+        payload: newLayers
     };
 };
 
