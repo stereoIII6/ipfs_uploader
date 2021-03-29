@@ -48,7 +48,7 @@ class Layers extends Component {
 	while(i < this.props.layers.length){
 		if(i >= dropLayer){
 			holdLayers[i] = this.props.layers[i];
-			holdlayers[i].key = i; 
+			holdLayers[i].key = i; 
 		}
 		i++;
 	}
@@ -61,7 +61,7 @@ class Layers extends Component {
 		this.props.deleteLayer(newLayers);	
 	}
     }
-    dynamicSort = (property) => {
+    function dynamicSort (property) {
         var sortOrder = 1;
         if(property[0] === "-") {
 	        sortOrder = -1;
