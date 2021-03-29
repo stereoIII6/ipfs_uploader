@@ -3,7 +3,7 @@ import { Button, InputGroup, Input, Form } from 'reactstrap';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addLayer, deleteLayer, moveLayer } from "./action/layerActions.js"
-
+const _ = require('lodash');
 class Layers extends Component {
     state = {
         path: null,
