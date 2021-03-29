@@ -39,6 +39,10 @@ class Layers extends Component {
         e.preventDefault();
         console.log("click delete layer", e.target.id);
         const dropLayer = e.target.id;
+        // drop layer
+        // rename layers after dropped layer
+        // sort layers array
+
         this.props.deleteLayer(dropLayer);
         document.getElementById("path").value = "";
     }
