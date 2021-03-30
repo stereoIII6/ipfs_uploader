@@ -33,7 +33,7 @@ class Layers extends Component {
                 ? e.target.checked
                 : e.target.value;
         this.setState({ [e.target.name]: value });
-        console.log(e.target.value);
+        // console.log(e.target.value);
     }
     goAddLayer = (e) => {
         e.preventDefault();
@@ -46,6 +46,7 @@ class Layers extends Component {
         console.log("click add layer", newLayer);
         this.props.addLayer(newLayer);
         document.getElementById("path").value = "";
+        document.getElementById("name").value = "";
     }
     goDeleteLayer = (e) => {
         e.preventDefault();
@@ -55,9 +56,6 @@ class Layers extends Component {
         const newLayers = this.props.layers.filter(layer => layer.key.toString() !== dropLayer.toString());
         console.log(newLayers);
         this.props.deleteLayer(newLayers);
-    }
-    goSetEdit = (e) => {
-        console.log(e.target.id);
     }
     render() {
         // const [isOpen, setIsOpen] = useState(false);
@@ -83,7 +81,7 @@ class Layers extends Component {
                             <div key={layer.key} className="alert alert-success" >
                                 <h5 style={{ float: "left", marginRight: "1em" }}>{layer.name}</h5>
                                 <Button style={{ float: "left", marginRight: "1em", width: "4em" }}>
-                                    <img src={`https://ipfs.io/ipfs/${layer.path}`} alt="" style={{ width: `36px`, float: "left", marginRight: "2em" }} />
+                                    <img src={`https://ipfs.io/ipfs/${layer.path}`} alt="" style={{ height: `24px`, float: "left", marginRight: "2em" }} />
 
                                 </Button>
 

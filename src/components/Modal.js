@@ -13,7 +13,7 @@ const MODAL_STYLES = {
     padding: "0px",
     background: "ivory",
     border: "2px solid red",
-    opacity: 0.95,
+    opacity: 1,
     zIndex: 1000
 
 }
@@ -46,36 +46,14 @@ export default function Modal({ open, children, onClose, layer, layers }) {
             </div>
             <hr />
             <div className="p-3">
+                <h6>Dynamic Input</h6>
                 {
-                    layers[layer].obj ? "edit" : "create"
+                    layers[layer].obj ? "edit your dynamicinput values" : "create new dynamic inputs"
                 }
                 <Form>
                     <div className="row">
-                        <div className="col-4">
-                        
-                            Monoparametric Content
-                            
-                            <Input type="select">
-                                <option id="default" >----</option>
-                                <option id="datetime" >Date Time</option>
-                                <option id="time" >Time</option>
-                                <option id="date" >Date</option>
-                                <option id="fossile" >Fossile Reserve</option>
-                                <option id="project" >Total Income</option>
-                                <option id="crowd" >Crowd Fund</option>
-                                <option id="custom" >Custom</option>
-                            </Input>
-                            <Input type="text" id="oracle_path" placeholder="Oracle" />
-                            <InputGroup >
-                            <Input type="text" id="monostart" placeholder="Start Trigger"/>
-                            <Input type="text" id="end" placeholder="End Trigger"/>
-                            </InputGroup>
-                        </div>
-                        <div className="col-4"></div>
-                        <div className="col-4">
-                        
-                            Diparametric Content
-                            
+                        <div className="col-4 pb-2">
+
                             <Input type="select">
                                 <option id="default" >----</option>
                                 <option id="pricechange" >Price Change</option>
@@ -84,10 +62,39 @@ export default function Modal({ open, children, onClose, layer, layers }) {
                             </Input>
                             <Input type="text" id="oracle_path" placeholder="Oracle" />
                             <InputGroup >
-                            <Input type="text" id="distart" placeholder="Start Trigger"/>
-                            <Input type="text" id="top" placeholder="Top Trigger"/>
-                            <Input type="text" id="bottom" placeholder="Bottom Trigger"/>
+                                <Input type="text" id="start" placeholder="Start Trigger" />
+                                <Input type="text" id="top" placeholder="Top Trigger" />
+                                <Input type="text" id="bottom" placeholder="Bottom Trigger" />
                             </InputGroup>
+                            <InputGroup >
+                                <Input type="text" id="start" placeholder="Start x" />
+                                <Input type="text" id="top" placeholder="Top x" />
+                                <Input type="text" id="bottom" placeholder="Bottom x" />
+                            </InputGroup>
+                            <InputGroup >
+                                <Input type="text" id="start" placeholder="Start y" />
+                                <Input type="text" id="top" placeholder="Top y" />
+                                <Input type="text" id="bottom" placeholder="Bottom y" />
+                            </InputGroup>
+                            <InputGroup >
+                                <Input type="text" id="start" placeholder="Start z" />
+                                <Input type="text" id="top" placeholder="Top z" />
+                                <Input type="text" id="bottom" placeholder="Bottom z" />
+                            </InputGroup>
+                            <InputGroup >
+                                <Input type="text" id="start" placeholder="Start r" />
+                                <Input type="text" id="top" placeholder="Top r" />
+                                <Input type="text" id="bottom" placeholder="Bottom r" />
+                            </InputGroup>
+                            <InputGroup >
+                                <Input type="text" id="start" placeholder="Start o" />
+                                <Input type="text" id="top" placeholder="Top o" />
+                                <Input type="text" id="bottom" placeholder="Bottom o" />
+                            </InputGroup>
+                        </div>
+                        <div className="col-8" style={{}}>
+                            Screen Preview
+                            <div style={{ background: "black", width: "375px", height: "215px" }}></div>
                         </div>
                     </div>
                 </Form>
