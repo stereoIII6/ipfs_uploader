@@ -9,12 +9,15 @@ class Media extends Component {
     render() {
         return (
             <div id="layers" className="col-9 p-0 m-0" style={{ height: "450px", background: "cornflowerblue", color: "ivory" }}>
-                <div id="screen" style={{ width: "750px", height: "430px", background: "darkgrey", margin: "10px auto" }}>
-                    <div style={{ position: "relative", top: "0", left: "0", width: "750px", height: "430px", background: "black", overflow: "hidden" }}>{
-                        this.props.layers.map(layer => (
-                            <img src={`https://ipfs.io/ipfs/${layer.path}`} alt="" key={layer.key} style={{ position: "absolute", top: `${0}px`, left: `${0}px`, opacity: 1, height: `${100}%`, zIndex: `${100 + layer.key}` }} />
-                        ))
-                    }</div>
+                <div style={{ backgroundImage: `url("https://ipfs.io/ipfs/QmTNbkJ5x3iY4VEiEUARfrCreqBZ3tXHU3oFnsUK7QnDie")`, width: "750px", height: "430px", overflow: "hidden", position: "relative", top: "20px", left: "0" }}>
+                    {
+                        this.props.layers.reverse(),
+                        this.props.layers.map(laya => (
+
+                            <div key={laya.key} style={{ width: "750px", height: "430px", position: "absolute", top: "0", left: "0", overflow: "hidden" }}>
+                                <img id="layers[layer].obj.alpha" src={`https://ipfs.io/ipfs/${laya.path}`} style={{ position: "absolute", top: `${laya.obj.alpha.y}px`, left: `${laya.obj.alpha.x}px`, width: `${(laya.obj.alpha.z / 100 * ((750) - 20))}px`, opacity: `${laya.obj.alpha.o / 100}`, transform: `rotate(${laya.obj.alpha.r}deg)` }} />
+                            </div>
+                        ))}
                 </div>
             </div >
         );

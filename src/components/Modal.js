@@ -98,6 +98,7 @@ export default function Modal({ open, children, onClose, layer, layers, rulerCha
                                             <CustomInput type="range" id="o" name={layer} min="0" max="100" value={lay.obj.alpha.o} onChange={rulerChange} />
                                             <h6>Rotation {lay.obj.alpha.r}</h6>
                                             <CustomInput type="range" id="r" name={layer} min="-360" max="360" value={lay.obj.alpha.r} onChange={rulerChange} />
+                                            <Button id="save" className="btn-success">SAVE</Button><Button id="reset" className="btn-danger">RESET</Button>
                                         </div> : null
                                 ))}
                         </div>
@@ -110,10 +111,7 @@ export default function Modal({ open, children, onClose, layer, layers, rulerCha
                                         console.log(laya.key),
                                         laya.key.toString() == layer.toString() ? <div key={laya.key} style={{ width: "485px", height: "280px", position: "absolute", top: "0", left: "0", overflow: "hidden" }}>
                                             <img id="layers[layer].obj.alpha" src={`https://ipfs.io/ipfs/${laya.path}`} style={{ position: "absolute", top: `${laya.obj.alpha.y * 2 / 3}px`, left: `${laya.obj.alpha.x * 2 / 3}px`, width: `${(laya.obj.alpha.z / 100 * ((750 * 2 / 3) - 20))}px`, opacity: `${laya.obj.alpha.o / 100}`, transform: `rotate(${laya.obj.alpha.r}deg)` }} />
-                                        </div> :
-                                            <div key={laya.key} style={{ width: "485px", height: "280px", position: "absolute", top: "0", left: "0", overflow: "hidden" }}>
-                                                <img id="layers[layer].obj.alpha" src={`https://ipfs.io/ipfs/${laya.path}`} style={{ position: "absolute", top: `${10}px`, left: `${10}px`, width: `${(0.5 * 485) - 20}px`, opacity: `0.5` }} />
-                                            </div>
+                                        </div> : null
                                     ))}
                             </div>
                         </div>
