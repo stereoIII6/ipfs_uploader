@@ -2,8 +2,7 @@ import React, { Component, useState } from 'react';
 import { Button, InputGroup, Input, Form } from 'reactstrap';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addLayer, deleteLayer, moveLayer, layersLoaded, bakeAlpha } from "./action/layerActions.js"
-import DynModal from './DynModal';
+import { addLayer, deleteLayer, moveLayer, layersLoaded, bakeAlpha } from "./action/layerActions.js";
 import Modal from "./Modal";
 const _ = require('lodash');
 class Layers extends Component {

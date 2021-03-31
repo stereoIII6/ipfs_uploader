@@ -9,7 +9,7 @@ class Media extends Component {
     render() {
         return (
             <div id="layers" className="col-9 p-0 m-0" style={{ height: "450px", background: "cornflowerblue", color: "ivory" }}>
-                <div style={{ backgroundImage: `url("https://ipfs.io/ipfs/QmTNbkJ5x3iY4VEiEUARfrCreqBZ3tXHU3oFnsUK7QnDie")`, width: "750px", height: "430px", overflow: "hidden", position: "relative", top: "20px", left: "0" }}>
+                <div style={{ background: "white", backgroundImage: `url("https://ipfs.io/ipfs/QmTNbkJ5x3iY4VEiEUARfrCreqBZ3tXHU3oFnsUK7QnDie")`, width: "750px", height: "430px", overflow: "hidden", position: "relative", top: "10px", left: "10px" }}>
                     {
                         this.props.layers.reverse(),
                         this.props.layers.map(laya => (
