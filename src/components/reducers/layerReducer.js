@@ -3,6 +3,7 @@ import {
     LAYERS_LOADED,
     ADD_LAYER,
     DEL_LAYER,
+    BAKE_ALPHA,
     MOVE_LAYER
 } from "../action/types";
 const initState = {
@@ -31,6 +32,12 @@ export default function (state = initState, action) {
             };
         case DEL_LAYER:
             console.log("reduced delete layer", action.payload);
+            return {
+                ...state,
+                layers: action.payload
+            };
+        case BAKE_ALPHA:
+            console.log("reduced bakeAlpha layer", action.payload);
             return {
                 ...state,
                 layers: action.payload

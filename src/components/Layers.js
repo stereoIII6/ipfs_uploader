@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import { Button, InputGroup, Input, Form } from 'reactstrap';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addLayer, deleteLayer, moveLayer, layersLoaded } from "./action/layerActions.js"
+import { addLayer, deleteLayer, moveLayer, layersLoaded, bakeAlpha } from "./action/layerActions.js"
 import DynModal from './DynModal';
 import Modal from "./Modal";
 const _ = require('lodash');
@@ -10,7 +10,22 @@ class Layers extends Component {
     state = {
         path: null,
         key: null,
-        obj: null,
+        obj: {
+            alpha: {
+
+                x: 10, // xposition
+                y: 10, // yposition
+                z: 100, // scale
+                o: 100, // opacity
+                r: 0 // rotation
+            },
+            top: null,
+            mid: null,
+            start: null,
+            low: null,
+            bottom: null,
+            custom: null
+        },
         isOpen: false,
         setIsOpen: false,
         activeLayer: null
@@ -20,12 +35,95 @@ class Layers extends Component {
         addLayer: PropTypes.func,
         deleteLayer: PropTypes.func,
         moveLayer: PropTypes.func,
-        layersLoaded: PropTypes.func
+        layersLoaded: PropTypes.func,
+        bakeAlpha: PropTypes.func
     };
     toggle = (e) => {
         e.preventDefault();
         this.setState({ isOpen: !this.state.isOpen, activeLayer: e.target.id });
         console.log(this.state.isOpen);
+    }
+    rulerChange = (e) => {
+        e.preventDefault();
+        console.log(`init by layer ${e.target.name}`);
+        switch (e.target.id) {
+            case "x":
+                this.props.layers.map(laya => (
+                    laya.key.toString() === e.target.name ?
+                        this.props.bakeAlpha({
+
+                            x: parseInt(e.target.value), // xposition
+                            y: laya.obj.alpha.y, // yposition
+                            z: laya.obj.alpha.z, // scale
+                            o: laya.obj.alpha.o, // opacity
+                            r: laya.obj.alpha.r,// rotation
+
+                        }, e.target.name, e.target.id, this.props.layers) : null
+                )
+                )
+                break;
+            case "y":
+                this.props.layers.map(laya => (
+                    laya.key.toString() === e.target.name ?
+                        this.props.bakeAlpha({
+
+                            x: laya.obj.alpha.x, // yposition
+                            y: parseInt(e.target.value), // xposition
+                            z: laya.obj.alpha.z, // scale
+                            o: laya.obj.alpha.o, // opacity
+                            r: laya.obj.alpha.r,// rotation
+
+                        }, e.target.name, e.target.id, this.props.layers) : null
+                )
+                )
+                break;
+            case "z":
+                this.props.layers.map(laya => (
+                    laya.key.toString() === e.target.name ?
+                        this.props.bakeAlpha({
+
+                            x: laya.obj.alpha.x, // x position
+                            y: laya.obj.alpha.y, // y position
+                            z: parseInt(e.target.value), // scale
+                            o: laya.obj.alpha.o, // opacity
+                            r: laya.obj.alpha.r,// rotation
+
+                        }, e.target.name, e.target.id, this.props.layers) : null
+                )
+                )
+                break;
+            case "o":
+                this.props.layers.map(laya => (
+                    laya.key.toString() === e.target.name ?
+                        this.props.bakeAlpha({
+
+                            x: laya.obj.alpha.x, // opacity
+                            y: laya.obj.alpha.y, // yposition
+                            z: laya.obj.alpha.z, // scale
+                            o: parseInt(e.target.value), // xposition
+                            r: laya.obj.alpha.r,// rotation
+
+                        }, e.target.name, e.target.id, this.props.layers) : null
+                )
+                )
+                break;
+            case "r":
+                this.props.layers.map(laya => (
+                    laya.key.toString() === e.target.name ?
+                        this.props.bakeAlpha({
+
+                            x: laya.obj.alpha.x,// rotation
+                            y: laya.obj.alpha.y, // yposition
+                            z: laya.obj.alpha.z, // scale
+                            o: laya.obj.alpha.o, // opacity
+                            r: parseInt(e.target.value), // xposition
+
+                        }, e.target.name, e.target.id, this.props.layers) : null
+                )
+                )
+                break;
+        }
+        console.log(`ruler change alpha.${e.target.id}`);
     }
     onChange = (e) => {
         const value =
@@ -41,7 +139,7 @@ class Layers extends Component {
             path: document.getElementById("path").value,
             key: this.props.layers.length,
             name: document.getElementById("name").value !== "" ? document.getElementById("name").value : this.props.layers.length,
-            obj: null
+            obj: this.state.obj
         }
         console.log("click add layer", newLayer);
         this.props.addLayer(newLayer);
@@ -100,7 +198,7 @@ class Layers extends Component {
                         ))
 
                     }</div>
-                    <Modal open={this.state.isOpen} onClose={this.toggle} layer={this.state.activeLayer} layers={this.props.layers}>
+                    <Modal open={this.state.isOpen} onClose={this.toggle} layer={this.state.activeLayer} layers={this.props.layers} rulerChange={this.rulerChange}>
                         Dynamic Content Editor&nbsp;
                     </Modal>
                 </div>
@@ -111,4 +209,4 @@ class Layers extends Component {
 const mapStateToProps = state => ({
     layers: state.layerState.layers,
 });
-export default connect(mapStateToProps, { addLayer, deleteLayer, moveLayer, layersLoaded })(Layers);
+export default connect(mapStateToProps, { addLayer, deleteLayer, moveLayer, layersLoaded, bakeAlpha })(Layers);

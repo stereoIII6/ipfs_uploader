@@ -1,9 +1,11 @@
+import { Input } from "reactstrap";
 import {
     LOAD_LAYERS,
     LAYERS_LOADED,
     ADD_LAYER,
     DEL_LAYER,
-    MOVE_LAYER
+    MOVE_LAYER,
+    BAKE_ALPHA
 } from "./types";
 
 export const getLayers = () => (dispatch) => {
@@ -24,6 +26,21 @@ export const setLoadLayer = () => {
         type: LOAD_LAYERS
     };
 
+};
+
+export const bakeAlpha = (inputAlpha, layer, param, layers) => {
+    // console.log("action bake ruler " + param + "layer" + layer + "to ", inputAlpha);
+    let bakeLayers = [];
+
+    layers.map(laya => (
+        laya.key.toString() === layer.toString() ? (laya.obj.alpha = inputAlpha, console.log("baking done")) : null,
+        bakeLayers.push(laya)
+    ));
+    console.log("action bake Ruler", bakeLayers)
+    return {
+        type: BAKE_ALPHA,
+        payload: bakeLayers
+    };
 };
 
 export const addLayer = (newLayer) => {
