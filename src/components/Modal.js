@@ -88,15 +88,15 @@ export default function Modal({ open, children, onClose, layer, layers, rulerCha
                                     console.log(layer),
                                     lay.key.toString() === layer.toString() ?
                                         <div key={layer}>
-                                            <h6>X Position //{console.log(layers[layer])}</h6>
+                                            <h6>X Position //{lay.obj.alpha.x}</h6>
                                             <CustomInput type="range" id="x" name={layer} min="-750" max="750" value={lay.obj.alpha.x} onChange={rulerChange} />
-                                            <h6>Y Position // </h6>
+                                            <h6>Y Position // {lay.obj.alpha.y}</h6>
                                             <CustomInput type="range" id="y" name={layer} min="-430" max="430" value={lay.obj.alpha.y} onChange={rulerChange} />
-                                            <h6>Scale </h6>
+                                            <h6>Scale {lay.obj.alpha.z}</h6>
                                             <CustomInput type="range" id="z" name={layer} min="1" max="120" value={lay.obj.alpha.z} onChange={rulerChange} />
-                                            <h6>Transparancy / Opacity </h6>
+                                            <h6>Transparancy / Opacity {lay.obj.alpha.o}</h6>
                                             <CustomInput type="range" id="o" name={layer} min="0" max="100" value={lay.obj.alpha.o} onChange={rulerChange} />
-                                            <h6>Rotation </h6>
+                                            <h6>Rotation {lay.obj.alpha.r}</h6>
                                             <CustomInput type="range" id="r" name={layer} min="-360" max="360" value={lay.obj.alpha.r} onChange={rulerChange} />
                                         </div> : null
                                 ))}
@@ -109,7 +109,7 @@ export default function Modal({ open, children, onClose, layer, layers, rulerCha
                                     layers.map(laya => (
                                         console.log(laya.key),
                                         laya.key.toString() == layer.toString() ? <div key={laya.key} style={{ width: "485px", height: "280px", position: "absolute", top: "0", left: "0", overflow: "hidden" }}>
-                                            <img id="layers[layer].obj.alpha" src={`https://ipfs.io/ipfs/${laya.path}`} style={{ position: "absolute", top: `${laya.obj.alpha.y}px`, left: `${laya.obj.alpha.x}px`, width: `${(laya.obj.alpha.z / 100 * (485 - 20))}px`, opacity: `${laya.obj.alpha.o / 100}`, transform: `rotate(${laya.obj.alpha.r}deg)` }} />
+                                            <img id="layers[layer].obj.alpha" src={`https://ipfs.io/ipfs/${laya.path}`} style={{ position: "absolute", top: `${laya.obj.alpha.y * 2 / 3}px`, left: `${laya.obj.alpha.x * 2 / 3}px`, width: `${(laya.obj.alpha.z / 100 * ((750 * 2 / 3) - 20))}px`, opacity: `${laya.obj.alpha.o / 100}`, transform: `rotate(${laya.obj.alpha.r}deg)` }} />
                                         </div> :
                                             <div key={laya.key} style={{ width: "485px", height: "280px", position: "absolute", top: "0", left: "0", overflow: "hidden" }}>
                                                 <img id="layers[layer].obj.alpha" src={`https://ipfs.io/ipfs/${laya.path}`} style={{ position: "absolute", top: `${10}px`, left: `${10}px`, width: `${(0.5 * 485) - 20}px`, opacity: `0.5` }} />
